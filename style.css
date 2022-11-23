@@ -1,236 +1,56 @@
-*{
+* {
     margin: 0;
     padding: 0;
 }
 
 
 
-body{
+body {
     background-image: url(img/back.jpg);
     background-repeat: no-repeat;
     background-size: 100% 100%;
+    background-position: center;
 }
 
 /*===== HEADER ==== */
 
-header{
-    position: relative;
+.linkLogo img {
+    height: 100px;
 }
 
-.linkLogo img{
-    height: 120px;
-}
-
-.menuNav{
-    height: 150px;
-    z-index: 3;
+.menuNav {
     font-family: Georgia, 'Times New Roman', Times, serif;
     font-size: 1.5rem;
     background-color: black;
 }
 
-hr{
-    margin: 0;
-    height: 7px;
+.navbar-toggler {
     background-color: white;
+    color: black;
+    height: 50px;
+    width: 70px;
 }
 
-.navbar-toggler{
-    background-color: white;
-    height: 60px;
-    width: 100px;
-}
-
-.nav-item a{
-    margin: 5px;
-    padding: 0;
-    text-shadow: 3px 1px 3px white;
-}
-
-.carritoCompras img{
+.carritoCompras img {
     height: 50px;
 }
 
-
-.titulo{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 2;
-    background-color: rgba(0, 0, 0, 0.411);
-    border-radius: 50px;
-    height: 300px;
+#carousel {
+    z-index: 1;
+    height: 83vh;
 }
 
-.carouselTitle{
-    text-align: center;
-    font-weight: bold;
-    color: white;
-    opacity: 100%;
-}
-
-.carrouselImg{
-    height: 600px;
-    width: 100%;
-}
-
-.carrouselImg img{
-    height: 600px;
-    /* opacity: 50%; */
-    object-fit: cover;    
+.carrouselImg img {
+    height: 83vh;
+    opacity: 50%;
+    object-fit: cover;
 }
 
 /* =============== MAIN ================= */
-main{
-    margin: 50px 10px 50px 10px;
-}
+
 /*==== Seleccion del tipo de bebida ===== */
 
-.selectType{
-    margin: 50px 20px 50px 20px;
-}
 
-.tituloSelecBebida h2{
-    margin-bottom: 20px;
-    font-family: Georgia, 'Times New Roman', Times, serif;
-    font-size: 45px;
-    text-decoration: underline;
-    text-align: center;
-    font-weight: bold;
-    color: white;
-}
-
-.bebidas{
-    display: grid;
-    column-gap: 10px;
-    row-gap: 10px;
-    grid-template-areas:
-    "aperitivos sinAlcohol cervezas"
-    "blancas vinos energ"
-}
-
-.bebidas img{
-height: 100%;
-width: 100%;
-}
-
-.bebidas .sinAlcohol{
-    grid-area: sinAlcohol;
-    height: 300px;
-    object-fit: cover;
-}
-
-.bebidas .vinos{
-    grid-area: vinos;
-    height: 300px;
-    object-fit: cover;
-}
-.bebidas .cervezas{
-    grid-area: cervezas;
-    height: 300px;
-}
-.bebidas .energ{
-    grid-area: energ;
-    height: 300px;
-}
-.bebidas .blancas{
-    grid-area: blancas;
-    height: 300px;
-}
-.bebidas .aperitivos{
-    grid-area: aperitivos;
-    height: 300px;
-}
-
-
-.tipoBebida{
-    position: relative;
-}
-
-.tipoBebida:hover{
-    opacity: 75%;
-}
-
-.descripcion{
-    position: absolute;
-    top: 50%;
-    left: 40%;
-    transform: translate(-30%, -40%);
-    color: white;
-    font-family: Georgia, 'Times New Roman', Times, serif;
-    font-weight: bold;
-    text-shadow: 2px 6px 6px rgb(7, 7, 7);
-    background-color: rgba(46, 41, 41, 0.496);
-    text-align: center;
-    font-size: 2.2rem;
-}
-
-@media (max-width:1300px){
-    .bebidas{
-        grid-template-areas:
-        "aperitivos sinAlcohol" 
-        "cervezas blancas" 
-        "vinos energ"
-    }
-}
-
-@media (max-width:800px){
-    .bebidas{
-        grid-template-areas:
-        "aperitivos sinAlcohol" 
-        "cervezas blancas" 
-        "vinos energ"
-    }
-    .descripcion{
-        font-size: 1.5rem;
-    }
-}
-
-@media (max-width:500px){
-    .bebidas{
-        grid-template-areas:
-        "aperitivos"
-        "sinAlcohol" 
-        "cervezas"
-        "blancas" 
-        "vinos"
-        "energ"
-    }
-
-}
-
-/* Formulario de Contacto */
-
-.titleForm{
-    margin-left: 20px;
-    text-align: left;
-    font-weight: bold;
-    color: white;
-    font-family: Georgia, 'Times New Roman', Times, serif;
-    font-size: 45px;
-    text-decoration: underline;
-}
-
-.formContacto{
-    margin: 30px 20px 30px 20px;
-    background-color: rgba(34, 34, 51, 0.629);
-    box-shadow: 10px 4px 15px rgb(205, 202, 202);
-}
-
-.form-label{
-    color: white;
-    font-weight: bold;
-}
-
-.botones{
-    margin-top: 20x;
-    margin-bottom: 20px;
-}
-
-.botones button{
-    width: 100px;
-}
 
 /*=========== FOOTER ========= */
 
@@ -242,119 +62,174 @@ width: 100%;
     font-size: 1.1rem;
     display: flex;
     flex-direction: column;
-    justify-content: center; }
-  
-  .filaUno {
+    justify-content: center;
+}
+
+.filaUno {
     border-bottom: #000 2px solid;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    align-items: flex-end; }
-  
-  .logoDireccion {
+    align-items: flex-end;
+}
+
+.logoDireccion {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
-    align-items: flex-end; }
-    .logoDireccion .logoFooter img{
-      height: 100px; }
-    .logoDireccion p {
-      margin: 10px 10px 10px 10px; }
-  
-  .seguinos {
+    align-items: flex-end;
+}
+
+.logoDireccion .logoFooter img {
+    height: 100px;
+}
+
+.logoDireccion p {
+    margin: 10px 10px 10px 10px;
+}
+
+.seguinos {
     margin: 10px 10px 10px 10px;
     display: flex;
     flex-direction: row;
-    justify-content: flex-end; }
-    .seguinos img {
-      margin-left: 10px;
-      height: 20px;
-      width: 20px; }
-  
-  .filaDos {
+    justify-content: flex-end;
+}
+
+.seguinos img {
+    margin-left: 10px;
+    height: 20px;
+    width: 20px;
+}
+
+.filaDos {
     margin: 15px 0px 0px 0px;
     display: flex;
     flex-direction: row;
-    justify-content: space-between; }
-    .filaDos p {
-      margin-left: 10px; }
-  
-  .logosTarjetas {
-    margin-right: 10px; }
-    .logosTarjetas img {
-      margin-left: 5px;
-      width: 25px;
-      height: 25px; }
-  
-  /* FOOTER */
-  @media (max-width: 700px) {
+    justify-content: space-between;
+}
+
+.filaDos p {
+    margin-left: 10px;
+}
+
+.logosTarjetas {
+    margin-right: 10px;
+}
+
+.logosTarjetas img {
+    margin-left: 5px;
+    width: 25px;
+    height: 25px;
+}
+
+/* FOOTER */
+@media (max-width: 700px) {
     .filaUno {
-      font-size: 1.4rem;
-      width: auto;
-      text-align: center;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center; }
-      .filaUno .titulo {
-        font-size: 1.4rem; }
+        font-size: 1.4rem;
+        width: auto;
+        text-align: center;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .filaUno .titulo {
+        font-size: 1.4rem;
+    }
+
     .filaDos {
-      font-size: 1.4rem;
-      width: auto;
-      text-align: center;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center; }
+        font-size: 1.4rem;
+        width: auto;
+        text-align: center;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
     .titulo {
-      font-size: 5vw; } }
-  
-  @media (max-width: 300px) {
+        font-size: 5vw;
+    }
+}
+
+@media (max-width: 300px) {
     .logoDireccion {
-      flex-direction: column; }
+        flex-direction: column;
+    }
+
     .filaUno {
-      font-size: 1.1rem; }
+        font-size: 1.1rem;
+    }
+
     .filaDos {
-      font-size: 1.1rem; }
+        font-size: 1.1rem;
+    }
+
     .titulo {
-      font-size: 1.1rem; } }
+        font-size: 1.1rem;
+    }
+}
 
 
 /*================== TIENDA ================== */
 
-/*===== CARDS ===== */
-
-.card{
-    padding: 0;
-    margin: 20px;
-    box-shadow: 10px 4px 15px rgb(205, 202, 202);
-    color: white;
+#main {
+    margin: 10px;
+    margin-bottom: 50px;
+    margin-top: 20px;
 }
 
-.cardText{
+/*===== CARDS ===== */
+
+.card {
+    width: 350px;
+    padding: 0;
+    margin: 20px;
+    box-shadow: 6px 2px 10px rgb(205, 202, 202);
+    color: white;
+
+}
+
+.cardText {
     background-color: rgb(11, 11, 11);
 }
 
-.cardText p{
+.cardText p {
     font-size: 1.1rem;
 }
 
-.divImg{
+.divImg {
     display: flex;
     flex-direction: row;
     justify-content: center;
 }
-.imgCard{
+
+.imgCard {
     height: 300px;
     object-fit: cover;
 }
 
-.card-body{
+.card-body {
     height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
-.cardBody-comprar{
+
+.cardBody-comprar {
+    margin-top: 50px;
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
+}
+
+@media (max-width:1000px) {
+
+    .cardsBebidas{
+        justify-content: center;
+    }
+
+    .card {
+        width: 80%;
+        object-fit: cover;
+    }
 }
