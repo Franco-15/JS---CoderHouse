@@ -18,7 +18,7 @@ body {
     height: 100px;
 }
 
-.menuNav {
+.menuNav { 
     font-family: Georgia, 'Times New Roman', Times, serif;
     font-size: 1.5rem;
     background-color: black;
@@ -36,12 +36,11 @@ body {
 }
 
 #carousel {
-    z-index: 1;
-    height: 83vh;
+    height: 100vh;
 }
 
 .carrouselImg img {
-    height: 83vh;
+    height: 100vh;
     opacity: 50%;
     object-fit: cover;
 }
@@ -231,5 +230,68 @@ body {
     .card {
         width: 80%;
         object-fit: cover;
+    }
+}
+
+/*======================= CARRITO =====================*/
+
+.swal2-html-container{
+    font-size: 0px;
+}
+
+.productoCarrito{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px;
+    text-transform: capitalize;
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+
+.productoCarrito button{
+    height: 50%;
+}
+
+
+.descripcionCarrito{
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.descripcionCarrito p{
+    margin: 10px;
+}
+
+.imgCarrito{
+    height: 150px;
+    width: 150px;
+    object-fit: cover;
+    object-position: center;
+}
+
+.imgCarrito img{
+    height: 150px;
+}
+
+.subtotal{
+    margin-top: 50px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+@media (max-width: 750px) {
+    .productoCarrito{
+        margin-top: 50px;
+        flex-direction: column;
     }
 }
