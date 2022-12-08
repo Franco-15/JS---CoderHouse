@@ -39,12 +39,32 @@ function setCard(id, bebida, precio, img, descripcion) {
           <p class="card-text">${descripcion}</p>
         </div>
         <div class="cardBody-comprar">
-          <button id=${id} type="button" class="btn btn-primary">Agregar al carrito</button>
+          <button id=${id} name= '' type="button" class="btn btn-primary">Agregar al carrito</button>
         </div>
       </div>
     </div>
   </div>
 </div>`;
+}
+
+function generateCards(arrayBebidas, main) {
+  /*Genero el div de las cards*/
+  let cardsBebidas = document.createElement("div");
+  cardsBebidas.id = "divMain";
+  cardsBebidas.className = "cardsBebidas row";
+  main.append(cardsBebidas);
+
+  /*Genero las cards*/
+  const divMain = document.getElementById("divMain");
+  arrayBebidas.forEach(bebida => {
+    divMain.innerHTML += setCard(
+      bebida.id,
+      bebida.nombre,
+      bebida.precio,
+      bebida.img,
+      bebida.descripcion
+    );
+  });
 }
 
 function setFooter() {
@@ -83,36 +103,18 @@ function setFooter() {
     </div>`;
 }
 
-function generateCards(arrayBebidas, main) {
-  /*Genero el div de las cards*/
-  let cardsBebidas = document.createElement("div");
-  cardsBebidas.id = "divMain";
-  cardsBebidas.className = "cardsBebidas row";
-  main.append(cardsBebidas);
-
-  /*Genero las cards*/
-  const divMain = document.getElementById("divMain");
-  arrayBebidas.forEach(bebida => {
-    divMain.innerHTML += setCard(
-      bebida.id,
-      bebida.nombre,
-      bebida.precio,
-      bebida.img,
-      bebida.descripcion
-    );
-  });
-}
-
 async function ingresar() {
-  let dataUsuario;
+  let data = null;
+
   const { value: usuario } = await Swal.fire({
     title: "Ingrese su usuario",
     input: "text",
     inputPlaceholder: "Usuario",
     showCloseButton: true,
   });
+
   if (usuario) {
-    dataUsuario = JSON.parse(localStorage.getItem(usuario));
+    let dataUsuario = JSON.parse(localStorage.getItem(usuario));
     if (!dataUsuario)
       Swal.fire({
         icon: "error",
@@ -154,7 +156,7 @@ async function ingresar() {
           const linkIngresar = document.getElementById("ingresar");
           linkIngresar.innerText = `${usuario}`;
 
-          return dataUsuario;
+          data = dataUsuario;
         } else {
           Swal.fire({
             icon: "error",
@@ -166,146 +168,50 @@ async function ingresar() {
       }
     }
   }
+
+  return data;
 }
 
-function crearUsuario(nombreUsuario, contraseña, carrito, id) {
-  const usuario = new Usuario(nombreUsuario, contraseña, carrito, id);
+function crearUsuario(nombreUsuario, contraseña, id) {
+  const usuario = new Usuario(nombreUsuario, contraseña, [], id);
   localStorage.setItem(usuario.nombre, JSON.stringify(usuario));
 }
 
 function htmlCarrito(carrito) {
-  let html;
+  let html='';
+  let subtotal = 0;
+
   carrito.forEach(producto => {
+    subtotal += producto.precio;
     console.log(producto);
-    html += `<div class=productoCarrito >
+    html += `<div id=c-${producto.id}  class=productoCarrito>
+      <div class='imgCarrito'>
         <img style='height=50px; width=50px;' src=${producto.img.src} alt=${producto.img.alt}>
+      </div>
       <div class="descripcionCarrito">
         <p>${producto.nombre}</p>
-        <p>${producto.precio}</p>
+        <p>${producto.cantidad}</p>
+        <p>$${producto.precio}</p>
       </div>
+      <button id='b-${producto.id}'type="button" class="btn btn-danger">Quitar bebida</button>
     </div>`;
   });
+
+  html += `<div class='subtotal'>
+    <p>SubTotal:</p>
+    <p id=monto >$${subtotal}</p>
+  </div>`;
   return html;
 }
 
-/*=========================================================================*/
+async function getBebidas() {
+  let bebidasFetch = await fetch("./productos.json");
+  let tipoBebida = await bebidasFetch.json();
 
-/*================= PROG PRINCIPAL ==================*/
-async function main() {
-  /*Objeto de arrays de bebidas*/
-  tipoBebida = {
-    vinos: [
-      new Bebida(1, "Vinos", "colon", 270, "Vino Colon Malbec", {
-        src: "img/vinos/colon-malbec.jpg",
-        alt: "Vino Colon Malbec",
-      }),
-      new Bebida(2, "Vinos", "don valentin", 370, "Vino Don Valentin Malbec", {
-        src: "img/vinos/donValentinMalbec.png",
-        alt: "Vino Don Valentin Malbec",
-      }),
-      new Bebida(3, "Vinos", "rutini", 470, "Vino Rutini", {
-        src: "img/vinos/tintoRutini.jpeg",
-        alt: "Vino Rutini",
-      }),
-    ],
-    cervezas: [
-      new Bebida(
-        1,
-        "Cervezas",
-        "patagonia",
-        570,
-        "Cerveza Patagonia Amber Lage",
-        {
-          src: "img/cervezas/PatagoniaAmberLage730.png",
-          alt: "Cerveza Patagonia Amber Lage",
-        }
-      ),
-      new Bebida(2, "Cervezas", "quilmes", 470, "Cerveza Quilmes", {
-        src: "img/cervezas/quilmesLitro.jpg",
-        alt: "Cerveza Quilmes",
-      }),
-      new Bebida(3, "Cervezas", "imperial", 370, "Cerveza Imperial Stout", {
-        src: "img/cervezas/imperialStoutLitro.png",
-        alt: "Cerveza Imperial Stout",
-      }),
-    ],
-    aperitivos: [
-      new Bebida(1, "Aperitivos", "branca", 470, "Fernet Branca", {
-        src: "img/aperitivos/fernet-branca-1lt.jpg",
-        alt: "Fernet Branca",
-      }),
-      new Bebida(2, "Aperitivos", "gancia", 170, "Gancia", {
-        src: "img/aperitivos/gancia.jpg",
-        alt: "Gancia",
-      }),
-      new Bebida(3, "Aperitivos", "campari", 370, "Campari", {
-        src: "img/aperitivos/campari.jpg",
-        alt: "Campari",
-      }),
-      new Bebida(4, "Aperitivos", "1882", 400, "Fernet 1882", {
-        src: "img/aperitivos/1882.jpg",
-        alt: "1882",
-      }),
-    ],
-    bebidasBlancas: [
-      new Bebida(1, "Bebidas Blancas", "gin bombay", 470, "Gin Bombay", {
-        src: "img/bebidaBlanca/ginBombay.jpg",
-        alt: "Gin Bombay",
-      }),
-      new Bebida(2, "Bebidas Blancas", "absolut", 270, "Vodka Absolut", {
-        src: "img/bebidaBlanca/absolut.jpeg",
-        alt: "Vodka Absolut",
-      }),
-      new Bebida(3, "Bebidas Blancas", "jackDaniels", 370, "Jack Daniels", {
-        src: "img/bebidaBlanca/jackDaniels.png",
-        alt: "Jack Daniels",
-      }),
-    ],
-    energizantes: [
-      new Bebida(1, "Energizantes", "speed", 470, "Speed", {
-        src: "img/energizantes/speed.png",
-        alt: "Speed",
-      }),
-      new Bebida(2, "Energizantes", "monster", 370, "Monster", {
-        src: "img/energizantes/monster.webp",
-        alt: "Monster",
-      }),
-      new Bebida(3, "Energizantes", "blue demon", 270, "Blue Demon", {
-        src: "img/energizantes/blueDemon-r.png",
-        alt: "Blue Demon",
-      }),
-    ],
-    sinAlcohol: [
-      new Bebida(1, "Sin Alcohol", "coca-cola", 170, "Coca-Cola", {
-        src: "img/sin-alcohol/cocaCola.webp",
-        alt: "Coca-Cola",
-      }),
-      new Bebida(2, "Sin Alcohol", "sprite", 370, "Sprite", {
-        src: "img/sin-alcohol/sprite.webp",
-        alt: "Sprite",
-      }),
-      new Bebida(3, "Sin Alcohol", "citric", 570, "Jugo CITRIC", {
-        src: "img/sin-alcohol/Jugo-Naranja-Citric-1-5l-1-879152.png",
-        alt: "Jugo CITRIC",
-      }),
-    ],
-  };
+  return tipoBebida;
+}
 
-  const linkTiposBebidas = [
-    document.getElementById("aperitivos"),
-    document.getElementById("vinos"),
-    document.getElementById("cervezas"),
-    document.getElementById("energizantes"),
-    document.getElementById("bebidasBlancas"),
-    document.getElementById("sinAlcohol"),
-  ];
-
-  /* ==================== EVENTOS ============================*/
-
-  /*Hardcodeo un usuario de prueba, ya que no hay un registro de usuarios*/
-  let contUsers = 0;
-  crearUsuario("admin", "admin", [], ++contUsers);
-
+async function edadValida() {
   const { value: range } = await Swal.fire({
     title: "Ingrese su edad",
     icon: "question",
@@ -319,13 +225,116 @@ async function main() {
     inputValue: 25,
   });
 
-  if (range >= 18) {
-    const linkIngresar = document.getElementById("ingresar");
-    let dataUsuario;
+  console.log(range);
+  return range >= 18;
+}
 
-    /*Se presiona sobre el link de ingresar*/
-    linkIngresar.onclick = () => {
-      if (linkIngresar.textContent.toLowerCase() !== "ingresar") {
+function habilitaCompra(dataUsuario) {
+  const buttonsAgregarCarrito = [
+    document.getElementById("1-v"),
+    document.getElementById("2-v"),
+    document.getElementById("3-v"),
+    document.getElementById("4-v"),
+    document.getElementById("1-c"),
+    document.getElementById("2-c"),
+    document.getElementById("3-c"),
+    document.getElementById("4-c"),
+    document.getElementById("1-e"),
+    document.getElementById("2-e"),
+    document.getElementById("3-e"),
+    document.getElementById("4-e"),
+    document.getElementById("1-a"),
+    document.getElementById("2-a"),
+    document.getElementById("3-a"),
+    document.getElementById("4-a"),
+    document.getElementById("5-a"),
+    document.getElementById("1-bb"),
+    document.getElementById("2-bb"),
+    document.getElementById("3-bb"),
+    document.getElementById("4-bb"),
+    document.getElementById("1-sa"),
+    document.getElementById("2-sa"),
+    document.getElementById("3-sa"),
+    document.getElementById("4-sa"),
+  ];
+
+  /*================= CLICK AGREGAR AL CARRITO ==================*/
+  buttonsAgregarCarrito.forEach(boton => {
+    console.log(boton);
+    if (boton)
+      boton.onclick = async () => {
+        if (dataUsuario) {
+          const bebidaElegida = tipoBebida.find(
+            bebida => bebida.id === boton.id
+          );
+          if (
+            dataUsuario.carrito.some(bebida => bebida.id === bebidaElegida.id)
+          ) {
+            const indexBebida = dataUsuario.carrito.findIndex(
+              bebida => bebida.id === bebidaElegida.id
+            );
+            dataUsuario.carrito[indexBebida].cantidad += 1;
+            dataUsuario.carrito[indexBebida].precio += bebidaElegida.precio;
+          } else {
+            bebidaElegida.cantidad = 1;
+            dataUsuario.carrito.push(bebidaElegida);
+          }
+          console.log(dataUsuario.carrito);
+          Toastify({
+            text: "Producto agregado al carrito!",
+            duration: 3000,
+            gravity: "top", // `top` or `bottom`
+            position: "right", // `left`, `center` or `right`
+            stopOnFocus: true, // Prevents dismissing of toast on hover
+            style: {
+              background: "linear-gradient(to right, #00b09b, #96c93d)",
+            },
+            onClick: function () {}, // Callback after click
+          }).showToast();
+        } else {
+          Toastify({
+            text: "Ingrese su usuario",
+            duration: 3000,
+            gravity: "top", // `top` or `bottom`
+            position: "right", // `left`, `center` or `right`
+            stopOnFocus: true, // Prevents dismissing of toast on hover
+            style: {
+              background: "linear-gradient(to right, #F73106, #CB9F96)",
+            },
+            onClick: function () {}, // Callback after click
+          }).showToast();
+        }
+      };
+  });
+}
+
+/*================= PROG PRINCIPAL ==================*/
+async function main() {
+  /*Objeto de arrays de bebidas*/
+  tipoBebida = await getBebidas();
+
+  const linkTiposBebidas = [
+    document.getElementById("aperitivos"),
+    document.getElementById("vinos"),
+    document.getElementById("cervezas"),
+    document.getElementById("energizantes"),
+    document.getElementById("bebidasBlancas"),
+    document.getElementById("sinAlcohol"),
+  ];
+
+  let habilitadoParaComprar = false;
+
+  /*Hardcodeo un usuario de prueba, ya que no hay un registro de usuarios*/
+  let contUsers = 0;
+  crearUsuario("admin", "admin", ++contUsers);
+
+  if (await edadValida()) {
+    const linkIngresar = document.getElementById("ingresar");
+    let dataUsuario = null;
+
+    /* === CLICK BOTON INGRESAR ===*/
+    linkIngresar.onclick = async () => {
+      if (dataUsuario) {
         Swal.fire({
           title: "Cierre de sesion",
           text: "Esta seguro que desea cerrar sesion?",
@@ -353,41 +362,103 @@ async function main() {
               title: "Cerrando Sesion...",
             });
 
+            localStorage.setItem(
+              dataUsuario.nombre,
+              JSON.stringify(dataUsuario)
+            );
             linkIngresar.innerText = "Ingresar";
+            dataUsuario = null;
+            if (habilitadoParaComprar) habilitaCompra(dataUsuario);
           }
         });
-      } else dataUsuario = ingresar();
-    };
-    
-    const linkCarrito = document.getElementById("carrito");
-    linkCarrito.onclick = () => {
-      if (linkIngresar.textContent.toLowerCase() !== "ingresar") {
-        Swal.fire({
-          title: 'Carrito',
-          width: '70%',
-          heightAuto: true,
-          position: 'top',
-          html: htmlCarrito(dataUsuario.carrito),
-          showConfirmButton: true,
-          showCancelButton: true,
-          confirmButtonColor: 'green',
-          cancelButtonColor: '#d33',
-          focusConfirm: false,
-          confirmButtonText: 'Finalizar Compra',
-          cancelButtonText: 'Seguir Comprando'
-        })
       } else {
-        ingresar().then(data => {
-           dataUsuario = data;
-           dataUsuario.carrito.push(tipoBebida.vinos[0]);
-           dataUsuario.carrito.push(tipoBebida.cervezas[0]);
-
-        }).catch(err => console.log(err));
-
+        dataUsuario = await ingresar();
+        /*Se ejecuta si se encuentra dentro de una seccion de bebidas para agregar al carrito*/
+        if (habilitadoParaComprar) habilitaCompra(dataUsuario);
       }
     };
 
-    /*Click sobre link de bebidas del navbar*/
+    //========== CLICK BOTON CARRITO ==========
+    const linkCarrito = document.getElementById("carrito");
+
+    linkCarrito.onclick = async () => {
+      if (dataUsuario) {
+        Swal.fire({
+          title: 'Carrito',
+          width: "70%",
+          heightAuto: true,
+          position: "top",
+          html: htmlCarrito(dataUsuario.carrito),
+          showConfirmButton: true,
+          showCancelButton: true,
+          confirmButtonColor: "green",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Finalizar Compra",
+          cancelButtonText: "Seguir Comprando",
+        });
+        
+        const idEliminarBebidas = tipoBebida.map(bebida => {
+          return document.getElementById(`c-${bebida.id}`);
+        });
+
+        idEliminarBebidas.forEach(botonElim => {
+          if (botonElim) {
+            botonElim.onclick = () => {
+              const indexBebida = dataUsuario.carrito.findIndex(
+                bebida => bebida.id === botonElim.id.substring(2)
+              );
+              let subtotal = document.getElementById(`monto`)
+              montoTotal = parseInt(subtotal.textContent.substring(1))
+              console.log(montoTotal)
+              montoTotal-=dataUsuario.carrito[indexBebida].precio
+              console.log(montoTotal)
+              subtotal.innerText = `$${montoTotal}`
+              const producto = document.getElementById(`c-${dataUsuario.carrito[indexBebida].id}`) 
+              dataUsuario.carrito.splice(indexBebida, 1);
+              producto.remove()
+              console.log(dataUsuario.carrito);
+            };
+          }
+        });
+
+        Swal.getConfirmButton().onclick = () =>{
+          if(dataUsuario.carrito.length){
+            let total = dataUsuario.carrito.map(bebida => bebida.precio).reduce((acumulado, precio) => acumulado + precio,0)
+            Swal.fire({
+              title: 'Desea confirmar la compra?',
+              showCancelButton: true,
+              confirmButtonText: 'Confirmar',
+            }).then((result) => {
+              /* Read more about isConfirmed, isDenied below */
+              if (result.isConfirmed) {
+                Swal.fire('Muchas gracias por su compra!', '', 'success')
+                dataUsuario.carrito = []
+              }
+            })
+          }
+          else
+          Toastify({
+            text: "No hay producto en el carrito",
+            duration: 3000,
+            gravity: "top", // `top` or `bottom`
+            position: "right", // `left`, `center` or `right`
+            stopOnFocus: true, // Prevents dismissing of toast on hover
+            style: {
+              background: "linear-gradient(to right, #F4E207 , #918927 )",
+            },
+            onClick: function () {}, // Callback after click
+          }).showToast();
+
+        }
+
+      } else {
+        dataUsuario = await ingresar();
+        /*Se ejecuta si se encuentra dentro de una seccion de bebidas para agregar al carrito*/
+        if (habilitadoParaComprar) habilitaCompra(dataUsuario);
+      }
+    };
+
+    /*========= CLICK BEBIDAS DEL NAVBAR ==========*/
     linkTiposBebidas.forEach(link => {
       link.onclick = () => {
         const span = document.getElementById("span");
@@ -408,7 +479,13 @@ async function main() {
         } else {
           document.getElementById("divMain").remove();
         }
-        generateCards(tipoBebida[link.id], main);
+        const bebidasFilter = tipoBebida.filter(
+          bebida => bebida.tipo === link.id
+        );
+        console.log(bebidasFilter);
+        generateCards(bebidasFilter, main);
+        habilitadoParaComprar = true;
+        habilitaCompra(dataUsuario);
       };
     });
   } else {
