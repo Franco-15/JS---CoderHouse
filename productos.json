@@ -6,7 +6,7 @@
         "precio": 270,
         "descripcion": "Vino Colon Malbec",
         "img": {
-            "src": "https://res.cloudinary.com/dgk9fa4rw/image/upload/v1669930264/ImgAppReact/img/vinos/colon-malbec_jxu00q.jpg",
+            "src": "https://res.cloudinary.com/dgk9fa4rw/image/upload/v1670380499/ImgAppReact/img/vinos/colon-malbec_h9i5ly.png",
             "alt": "Vino Colon Malbec"
         }
     },
@@ -28,7 +28,7 @@
         "precio": 470,
         "descripcion": "Vino Rutini",
         "img": {
-            "src": "https://res.cloudinary.com/dgk9fa4rw/image/upload/v1669930265/ImgAppReact/img/vinos/tintoRutini_d8s5mp.jpg",
+            "src": "https://res.cloudinary.com/dgk9fa4rw/image/upload/v1670380499/ImgAppReact/img/vinos/tintoRutini_ailum7.png",
             "alt": "Vino Rutini"
         }
     },
@@ -39,7 +39,7 @@
         "precio": 470,
         "descripcion": "Vino Dadá",
         "img": {
-            "src": "https://res.cloudinary.com/dgk9fa4rw/image/upload/v1669930266/ImgAppReact/img/vinos/tintoDada_vmzsmu.jpg",
+            "src": "https://res.cloudinary.com/dgk9fa4rw/image/upload/v1670380499/ImgAppReact/img/vinos/tintoDada_dgqczr.png",
             "alt": "Vino Dada"
         }
     },
