@@ -73,7 +73,7 @@ function setFooter() {
     <div class="filaUno">
       <div class="logoDireccion">
         <a href="index.html">
-          <p class="logoFooter"><img src="img/MDQ Bebidas.png" alt="logo"></p>
+          <p class="logoFooter"><img src="https://res.cloudinary.com/dgk9fa4rw/image/upload/v1669930265/ImgAppReact/img/MDQ_Bebidas_tqx495.png" alt="logo"></p>
         </a>
         <p>Guemes 2856 - Mar del Plata</p>
       </div>
@@ -81,11 +81,11 @@ function setFooter() {
       <div class="seguinos">
         <p>Seguinos!</p>
         <div class="logosRedes">
-          <a href="https://www.facebook.com/" target="_blank"><img src="img/footer/facebook.png"
+          <a href="https://www.facebook.com/" target="_blank"><img src="https://res.cloudinary.com/dgk9fa4rw/image/upload/v1669930263/ImgAppReact/img/footer/facebook_bqj8r1.png"
               alt="icono facebook" /></a>
-          <a href="https://www.instagram.com/" target="_blank"><img src="img/footer/Instagram.png"
+          <a href="https://www.instagram.com/" target="_blank"><img src="https://res.cloudinary.com/dgk9fa4rw/image/upload/v1669930261/ImgAppReact/img/footer/Instagram_bwp3nx.png"
               alt="icono instagram" /></a>
-          <a href="https://twitter.com/" target="_blank"><img src="img/footer/twitter.png" alt="icono twitter" /></a>
+          <a href="https://twitter.com/" target="_blank"><img src="https://res.cloudinary.com/dgk9fa4rw/image/upload/v1669930264/ImgAppReact/img/footer/twitter_krdklt.png" alt="icono twitter" /></a>
         </div>
       </div>
     </div>
@@ -96,9 +96,9 @@ function setFooter() {
       </p>
 
       <div class="logosTarjetas">
-        <img src="img/footer/visa.png" alt="icono visa" />
-        <img src="img/footer/master.png" alt="icono master" />
-        <img src="img/footer/icono-paypal.png" alt="icono paypal" />
+        <img src="https://res.cloudinary.com/dgk9fa4rw/image/upload/v1669930264/ImgAppReact/img/footer/visa_n1a8d3.png" alt="icono visa" />
+        <img src="https://res.cloudinary.com/dgk9fa4rw/image/upload/v1669930262/ImgAppReact/img/footer/master_fj5rxu.png" alt="icono master" />
+        <img src="https://res.cloudinary.com/dgk9fa4rw/image/upload/v1669930263/ImgAppReact/img/footer/icono-paypal_autbpk.png" alt="icono paypal" />
       </div>
     </div>`;
 }
